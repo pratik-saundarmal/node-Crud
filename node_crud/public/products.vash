@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+  </head>
+  <body>
+    <h1>Products</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Category Id</th>
+          <th>Category Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < products.length; i++) { %>
+        <tr>
+          <td><%= products[i]._id %></td>
+          <td><%= products[i].name %></td>
+          <td><%= products[i].categoryId._id %></td>
+          <td><%= products[i].categoryId.name %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <form method="post" action="/products">
+      <label for="name">Name</label>
+      <input type="text" name="name" />
+      <label for="categoryId">Category</label>
+      <select name="categoryId">
+        <% for (var i = 0; i < categories.length; i++) { %>
+        <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+        <% } %>
+      </select>
+      <button type="submit">Create Product</button>
+    </form>
+    <% if (page > 0) { %>
+    <a href="?page=<%= page - 1 %>">Previous</a>
+    <% } %>
+    <% if (page < pages - 1) { %>
+    <a href="?page=<%= page + 1 %>">Next</a>
+    <% } %>
+  </body>
+</html>
